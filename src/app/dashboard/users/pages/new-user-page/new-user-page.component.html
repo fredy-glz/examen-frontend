@@ -1,0 +1,78 @@
+<h1>Agregar Usuario</h1>
+<mat-divider class="mb-2"></mat-divider>
+
+<div class="grid flex justify-content-center">
+    <div class="col-8">
+        <mat-card>
+            <mat-card-content>
+                <form class="grid" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field class="col-12 sm:col-3">
+                        <mat-label>Usuario</mat-label>
+                        <input type="text" matInput required formControlName="usuario" />
+                        <mat-error *ngIf="isValidField('usuario')">{{getFieldError('usuario')}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-3">
+                        <mat-label>Nombre</mat-label>
+                        <input type="text" matInput required formControlName="nombre" />
+                        <mat-error *ngIf="isValidField('nombre')">{{getFieldError('nombre')}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-3">
+                        <mat-label>Apellido Paterno</mat-label>
+                        <input type="text" matInput required formControlName="apellidoPaterno" />
+                        <mat-error
+                            *ngIf="isValidField('apellidoPaterno')">{{getFieldError('apellidoPaterno')}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-3">
+                        <mat-label>Apellido Materno</mat-label>
+                        <input type="text" matInput required formControlName="apellidoMaterno" />
+                        <mat-error
+                            *ngIf="isValidField('apellidoMaterno')">{{getFieldError('apellidoMaterno')}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-4">
+                        <mat-label>Nombre completo</mat-label>
+                        <input type="text" matInput readonly [value]="fullName" />
+                        <mat-error
+                            *ngIf="isValidField('apellidoMaterno')">{{getFieldError('apellidoMaterno')}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-4">
+                        <mat-label>Grupo</mat-label>
+                        <input matInput [matAutocomplete]="auto" formControlName="departamento">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let group of filteredGroups | async" [value]="group.grupo">
+                                <span>{{ group.grupo }}</span>
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <mat-error *ngIf="isValidField('departamento')">{{getFieldError('departamento')}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-4">
+                        <mat-label>Puesto</mat-label>
+                        <input matInput [matAutocomplete]="auto2" formControlName="puesto">
+                        <mat-autocomplete #auto2="matAutocomplete">
+                            <mat-option *ngFor="let puesto of filteredPuestos | async" [value]="puesto.description">
+                                <span>{{ puesto.description }}</span>
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <mat-error *ngIf="isValidField('puesto')">{{getFieldError('puesto')}}</mat-error>
+                    </mat-form-field>
+
+                </form>
+
+                <div class="flex justify-content-between">
+                    <button mat-flat-button color="warn" (click)="onBack()">Cancelar</button>
+                    <button mat-flat-button color="primary" (click)="onSubmit()">
+                        <mat-icon>save</mat-icon>
+                        Guardar
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

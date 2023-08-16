@@ -1,0 +1,43 @@
+<div class="container">
+    <mat-form-field class="filter">
+        <mat-label>Nombre o número</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+
+    <div *ngIf="dataSource.data.length > 0" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+            <!-- Numero Column -->
+            <ng-container matColumnDef="numero">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+            </ng-container>
+
+            <!-- Grupo Paterno Column -->
+            <ng-container matColumnDef="grupo">
+                <th mat-header-cell *matHeaderCellDef> Grupo </th>
+                <td mat-cell *matCellDef="let element"> {{element.grupo}} </td>
+            </ng-container>
+
+            <!-- Descripción Materno Column -->
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+
+        </table>
+        <mat-divider></mat-divider>
+        <mat-paginator [pageSize]="5" showFirstLastButtons aria-label="Select page of groups">
+        </mat-paginator>
+    </div>
+
+    <button class="flotante" mat-fab color="primary" [routerLink]="['./new-group']">
+        <mat-icon>group_add</mat-icon>
+    </button>
+</div>

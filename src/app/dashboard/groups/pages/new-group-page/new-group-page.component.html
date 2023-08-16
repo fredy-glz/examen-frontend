@@ -1,0 +1,37 @@
+<h1>Agregar Grupo</h1>
+<mat-divider class="mb-2"></mat-divider>
+
+<div class="grid flex justify-content-center">
+    <div class="col-8">
+        <mat-card>
+            <mat-card-content>
+                <form class="grid" [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field class="col-12">
+                        <mat-label>Numero</mat-label>
+                        <input type="number" matInput required formControlName="numero" />
+                        <mat-error *ngIf="isValidField('numero')">{{getFieldError('numero')}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12">
+                        <mat-label>Nombre</mat-label>
+                        <input type="text" matInput required formControlName="grupo" />
+                        <mat-error *ngIf="isValidField('grupo')">{{getFieldError('grupo')}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-12">
+                        <mat-label>Descripción</mat-label>
+                        <input type="text" matInput required formControlName="descripcion" />
+                        <mat-error *ngIf="isValidField('descripcion')">{{getFieldError('descripcion')}}</mat-error>
+                    </mat-form-field>
+                </form>
+
+                <div class="flex justify-content-between">
+                    <button mat-flat-button color="warn" (click)="onBack()">Cancelar</button>
+                    <button mat-flat-button color="primary" (click)="onSubmit()">
+                        <mat-icon>save</mat-icon>
+                        Guardar
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
